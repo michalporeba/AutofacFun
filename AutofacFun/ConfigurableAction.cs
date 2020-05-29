@@ -27,4 +27,15 @@ namespace AutofacFun
     {
         public string Value { get; set; }
     }
+
+    public class ConfigurationResolver
+    {
+        public T Get<T>()
+            where T : Configuration, new()
+        {
+            var output = Activator.CreateInstance<T>();
+            output.Value = Guid.NewGuid().ToString().Substring(8);
+            return output;
+        }
+    }
 }
