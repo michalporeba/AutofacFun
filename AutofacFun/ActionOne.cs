@@ -19,7 +19,7 @@
             return $"Action One with configurable property {_configuration.TextProperty}";
         }
 
-        public class Configuration
+        public class Configuration : IConfiguration
         {
             public string TextProperty { get; set; }
         }

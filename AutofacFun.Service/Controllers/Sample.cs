@@ -3,7 +3,7 @@
 namespace AutofacFun.Service.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("[controller]/[action]")]
     public class Sample : ControllerBase
     {
         [HttpGet]
@@ -15,7 +15,10 @@ namespace AutofacFun.Service.Controllers
             => action.Execute();
         
         [HttpGet]
-        public string One([FromServices] IActionTwo action)
+        public string Two([FromServices] IActionTwo action)
             => action.Execute();
+
+        [HttpGet]
+        public string Test() => "Hello";
     }
 }
