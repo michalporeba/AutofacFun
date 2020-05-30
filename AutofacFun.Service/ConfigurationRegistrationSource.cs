@@ -25,7 +25,13 @@ namespace AutofacFun.Service
                 Guid.NewGuid(),
                 new DelegateActivator(swt.ServiceType, (c, p) =>
                 {
-                    return Activator.CreateInstance(swt.ServiceType);
+                    var provider = c.Resolve<IConfigurationProvider>();
+                    var config = Activator.CreateInstance(swt.ServiceType);
+                    var method = provider.GetType()
+                        .GetMethod(nameof(IConfigurationProvider.Get))
+                        ?.MakeGenericMethod(swt.ServiceType);
+
+                    return method?.Invoke(provider, new[] {config}); 
                 }), 
                 new CurrentScopeLifetime(), 
                 InstanceSharing.None,

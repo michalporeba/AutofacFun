@@ -8,6 +8,7 @@ namespace AutofacFun.Service
         {
             base.Load(builder);
             builder.RegisterSource(new ConfigurationRegistrationSource());
+            builder.RegisterType<ConfigurationProvider>().As<IConfigurationProvider>();
             builder.RegisterType<ConfigurableAction>().As<IConfigurableAction>();
             builder.RegisterType<ActionOne>().As<IActionOne>();
             builder.RegisterType<ActionTwo>().As<IActionTwo>();
