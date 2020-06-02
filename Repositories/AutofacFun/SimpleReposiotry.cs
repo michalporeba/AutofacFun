@@ -5,15 +5,15 @@
         string GetIdentity();
     }
     
-    public class SimpleRepositoryOne : ISimpleRepository
+    public class SimpleRepository : ISimpleRepository
     {
+        private readonly ICoreRepository _core;
+        public SimpleRepository(ICoreRepository core)
+        {
+            _core = core;
+        }
+        
         public string GetIdentity()
-            => "SimpleRepositoryOne";
-    }
-
-    public class SimpleRepositoryTwo : ISimpleRepository
-    {
-        public string GetIdentity()
-            => "SimpleRepositoryTwo";
+            => $"SimpleRepository {_core.GetImplementationType()} for {typeof(T)}";
     }
 }

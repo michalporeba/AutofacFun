@@ -5,15 +5,15 @@
         string GetIdentity();
     }
     
-    public class ComplexRepositoryOne<T> : IComplexRepository<T>
+    public class ComplexRepository<T> : IComplexRepository<T>
     {
+        private readonly ICoreRepository _core;
+        public ComplexRepository(ICoreRepository core)
+        {
+            _core = core;
+        }
+        
         public string GetIdentity()
-            => $"ComplexRepositoryOne for {typeof(T)}";
-    }
-
-    public class ComplexRepositoryTwo<T> : IComplexRepository<T>
-    {
-        public string GetIdentity()
-            => $"ComplexRepositoryTwo for {typeof(T)}";
+            => $"ComplexRepository {_core.GetImplementationType()} for {typeof(T)}";
     }
 }
